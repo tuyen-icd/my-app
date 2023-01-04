@@ -9,8 +9,8 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SettingNavigator from "./SettingNavigator";
 import { Platform, StyleSheet, TouchableOpacity } from "react-native";
-import CustomTabBarButton from "../components/CustomTabBarButton";
-import CustomTabBar from "../components/CustomTabBar";
+import CustomTabBarButton from "../components/CustomNavigation/CustomTabBarButton";
+import CustomTabBar from "../components/CustomNavigation/CustomTabBar";
 import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();

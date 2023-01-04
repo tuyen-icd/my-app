@@ -1,9 +1,4 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { COLORS } from "../../constants";
 import { useNavigation } from "@react-navigation/native";

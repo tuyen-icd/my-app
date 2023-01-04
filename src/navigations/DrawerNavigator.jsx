@@ -4,7 +4,7 @@ import { COLORS, ROUTES } from "../constants";
 import { Notifications, Wallet } from "../screens";
 import ButtonTabNavigator from "./BottomTabNavigator";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import CustomDrawer from "../components/CustomDrawer";
+import CustomDrawer from "../components/CustomNavigation/CustomDrawer";
 
 const Drawer = createDrawerNavigator();
 

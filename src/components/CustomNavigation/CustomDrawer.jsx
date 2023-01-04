@@ -10,7 +10,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {COLORS, IMGS} from '../constants';
+import {COLORS, IMGS} from '../../constants';
 
 const {width} = Dimensions.get('screen');
 

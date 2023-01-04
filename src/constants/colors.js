@@ -12,5 +12,6 @@ export default {
     grayLight: '#ccc',
     black: '#0a0a0a',
     red: 'red',
+    placeholderColor: '#989494',
   };
   

@@ -5,28 +5,73 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {} from "react-native-gesture-handler";
 import { COLORS, ROUTES } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Delete_ic, Logo, LogoICD } from "../../assets/icons";
-import { LinearGradient } from 'expo-linear-gradient';
+import {
+  Delete_ic,
+  IcLockActiveNew,
+  IcLockNew,
+  Logo,
+  LogoICD,
+} from "../../assets/icons";
+import { LinearGradient } from "expo-linear-gradient";
+import TextInputField from "../../components/Input/TextInputField";
+import InputPassword from "../../components/Input/InputPassword";
+import InputEmail from "../../components/Input/InputEmail";
 
 const Login = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [loginFormState, setLoginFormState] = useState({
+    userName: { value: "", error: null },
+    password: { value: "", error: null },
+  });
+
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+
     <SafeAreaView style={styles.main}>
       <View style={styles.container}>
         <View style={styles.wFull}>
           <View style={styles.row}>
-            <LogoICD width={300} height={150}/>
+            <LogoICD width={300} height={150} />
           </View>
 
           <Text style={styles.loginContinueTxt}>Login in to continue</Text>
-          <TextInput style={styles.input} placeholder="Email" />
-          <TextInput style={styles.input} placeholder="Password" secureTextEntry={true}/>
+          <InputEmail
+            placeholder="Email"
+            value={loginFormState.userName.value}
+            error={loginFormState.userName.error}
+            onChangeText={(text) => {
+              setLoginFormState({
+                ...loginFormState,
+                userName: {
+                  value: text,
+                  error: null,
+                },
+              });
+            }}
+          />
+          <InputPassword
+            placeholder="Password"
+            error={loginFormState.password.error}
+            onChangeText={(text) => {
+              setLoginFormState({
+                ...loginFormState,
+                password: {
+                  value: text,
+                  error: null,
+                },
+              });
+            }}
+            value={loginFormState.password.value}
+          />
 
           <View style={styles.loginBtnWrapper}>
             <LinearGradient
@@ -48,10 +93,11 @@ const Login = () => {
 
           {/***************** FORGOT PASSWORD BUTTON *****************/}
           <TouchableOpacity
-            onPress={() => navigation.navigate(ROUTES.FORGOT_PASSWORD, {
-              userId: 'ff8qwfv1ahjk',
-            })}
-            style={styles.forgotPassBtn}
+            onPress={() =>
+              navigation.navigate(ROUTES.FORGOT_PASSWORD, {
+                userId: "ff8qwfv1ahjk",
+              })
+            }
           >
             <Text style={styles.forgotPassText}>Forgot Password?</Text>
           </TouchableOpacity>
@@ -68,6 +114,7 @@ const Login = () => {
         </View>
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -102,7 +149,7 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     marginBottom: 16,
     fontWeight: "bold",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   input: {
     borderWidth: 1,
