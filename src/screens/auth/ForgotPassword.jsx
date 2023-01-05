@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { FC } from 'react'
 import { useRoute } from '@react-navigation/native'
+
 
 const ForgotPassword = () => {
     const route = useRoute();

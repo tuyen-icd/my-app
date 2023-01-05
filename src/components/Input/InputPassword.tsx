@@ -30,15 +30,12 @@ const InputPassword: FC<InputPassWordProps> = (props: {
         <IcEyeOpened {...styles} />
       );
     }
-    return null;
   };
 
   return (
     <TxtInput
       {...props}
-      leftComponent={(valueIsNotEmpty, styles, disable) => {
-        valueIsNotEmpty ? <IcLockActiveNew {...styles}/> : <IcLockNew {...styles}/>;
-      }}
+      leftComponent={(valueIsNotEmpty, styles) => (valueIsNotEmpty ? <IcLockActiveNew {...styles}/> : <IcLockNew {...styles}/>)}
       rightComponent={passwordButton}
       onRightComponentPress={() => setHidePassword(!hidePassword)}
       secureTextEntry={hidePassword}

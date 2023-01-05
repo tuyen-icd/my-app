@@ -5,11 +5,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { FC } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, ROUTES } from "../../constants";
 
-const Settings = () => {
+const Settings: FC = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView
@@ -23,7 +23,7 @@ const Settings = () => {
       <Text>Settings</Text>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate(ROUTES.SETTINGS_DETAIL)}
+        onPress={() => navigation.navigate(ROUTES.SETTINGS_DETAIL as never)}
         style={styles.button}
         activeOpacity={0.8}
       >
@@ -31,7 +31,7 @@ const Settings = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate(ROUTES.LOGIN)}
+        onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
         style={styles.button}
         activeOpacity={0.8}
       >

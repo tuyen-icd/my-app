@@ -16,14 +16,13 @@ const InputEmail: FC<TxtInputProps> = ({
       onChangeText={onChangeText}
       containerStyle={containerStyle}
       placeholder={placeholder}
-
-      leftComponent={(valueIsNotEmpty, styles) => {
+      leftComponent={(valueIsNotEmpty, styles) =>
         valueIsNotEmpty ? (
           <IcEmailActiveNew {...styles} />
         ) : (
           <IcEmailNew {...styles} />
-        );
-      }}
+        )
+      }
       error={error}
     />
   );

@@ -7,6 +7,7 @@ import { ROUTES, COLORS } from "../constants";
 import ButtonTabNavigator from "./BottomTabNavigator";
 import DrawerNavigator from './DrawerNavigator';
 
+
 const Stack = createStackNavigator();
 
 function AuthNavigator() {

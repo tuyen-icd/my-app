@@ -33,20 +33,21 @@ const ContainerTextInput: FC<ContainerTextInputProps> = ({
     }
     return COLORS.gradientForm;
   };
+
   return (
-    <React.Fragment>
+    <>
       <View
         style={[
           styles.userInputWrap,
           {
             borderColor: getBorderColor(isFocused, error),
           },
-          containerStyle
+          containerStyle,
         ]}
       >
         {Boolean(leftComponent) && (
           <View style={{ marginStart: pixelSizeHorizontal(14) }}>
-            {leftComponent(valueIsNotEmpty, iconProps, disable)}
+            {leftComponent(valueIsNotEmpty, iconProps)}
           </View>
         )}
         {children}
@@ -59,10 +60,10 @@ const ContainerTextInput: FC<ContainerTextInputProps> = ({
           </Pressable>
         )}
       </View>
-      <View style={{minHeight: heightPixel(20)}}>
+      <View style={{ minHeight: heightPixel(20) }}>
         {Boolean(error) && !_.isEmpty(error) && <Text>{error?.message}</Text>}
       </View>
-    </React.Fragment>
+    </>
   );
 };
 

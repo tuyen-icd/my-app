@@ -1,6 +1,6 @@
 export default {
     LOGIN: 'Login',
-    REGISTER: 'Register',
+    REGISTER: 'Sign Up',
     FORGOT_PASSWORD: 'Forgot Password',
   
     HOME: 'Home',

@@ -13,5 +13,6 @@ export default {
     black: '#0a0a0a',
     red: 'red',
     placeholderColor: '#989494',
+    green: '#22863a',
   };
   

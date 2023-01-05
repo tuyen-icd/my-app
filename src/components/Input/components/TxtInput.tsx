@@ -7,40 +7,43 @@ import ContainerTextInput from "../ContainerTextInput";
 
 export interface TxtInputProps extends BaseProps {
   secureTextEntry?;
-  value?;
-  onFocusTxtInput?: () => void;
-  onChangeText?: (text) => void;
-  keyboardType?;
-  onSubmitEditing?: (event: any) => void;
-  returnKeyType?;
-  onBlur?: () => void;
-  maxLength?: number;
+    value?;
+    onFocusTxtInput?: () => void;
+    onChangeText?: (text) => void;
+    keyboardType?;
+    onSubmitEditing?: (event: any) => void;
+    returnKeyType?;
+    onBlur?: () => void;
+    maxLength?: number;
+    iconEmail?: boolean;
 }
 
 const TxtInput: FC<TxtInputProps> = ({
   error,
-  value,
-  leftComponent,
-  rightComponent,
-  containerStyle,
-  disable,
-  onRightComponentPress,
-  secureTextEntry,
-  placeholder,
-  onFocusTxtInput,
-  onBlur,
-  onChangeText,
-  onSubmitEditing,
-  keyboardType,
-  returnKeyType
+    placeholder,
+    secureTextEntry,
+    containerStyle,
+    leftComponent,
+    rightComponent,
+    onRightComponentPress,
+    onChangeText,
+    onSubmitEditing,
+    onBlur,
+    value,
+    disable,
+    keyboardType,
+    returnKeyType,
+    onFocusTxtInput,
+    maxLength,
 }) => {
   const [valueIsNotEmpty, setValueIsNotEmpty] = useState(Boolean(value));
   const [isFocusedState, setIsFocusedState] = useState(false);
   const [errorState, setErrorState] = useState(null);
 
+
   useEffect(() => {
     setErrorState(error);
-  }, [error]);
+}, [error]);
 
   return (
     <ContainerTextInput
@@ -58,12 +61,13 @@ const TxtInput: FC<TxtInputProps> = ({
         placeholder={placeholder}
         placeholderTextColor={COLORS.placeholderColor}
         style={styles.input}
-        editable={!disable}
-        multiline={false}
+        editable={!disable} //Nếu false, văn bản không thể chỉnh sửa. Giá trị mặc định là true.
+        multiline={false} //Nếu true, văn bản nhập vào có thể là nhiều dòng. Giá trị mặc định là false.
         blurOnSubmit={true}
         value={value}
         onBlur={() => {
           setIsFocusedState(false);
+          if(onBlur) onBlur();
         }}
         onFocus={() => {
           setIsFocusedState(true);
@@ -79,8 +83,9 @@ const TxtInput: FC<TxtInputProps> = ({
           }
         }}
         onSubmitEditing={onSubmitEditing}
-        keyboardType={keyboardType}
-        returnKeyType={returnKeyType}
+        keyboardType={keyboardType} //Xác định bàn phím nào sẽ mở, ví dụ: numeric.
+        returnKeyType={returnKeyType} //Xác định giao diện của phím quay lại.(Done, go, next, search, send)
+        maxLength={maxLength}
       />
     </ContainerTextInput>
   );

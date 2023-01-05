@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         height: '100%',
         marginHorizontal: pixelSizeHorizontal(14),
         fontSize: fontPixel(14),
-        color: COLORS.placeholderColor
+        color: COLORS.placeholderColor,
     },
     errorMessage: {
         color: COLORS.red,

@@ -1,13 +1,14 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { COLORS } from "../../constants";
+import React, { FC } from "react";
+import { COLORS, ROUTES } from "../../constants";
 import getStoreData from "../../redux/Helpers";
 import { PRODUCT_REDUCER } from "../../redux/reducers/ReducerTypes";
+import { useNavigation } from "@react-navigation/native";
 
-const Wallet = () => {
+const Wallet: FC = () => {
+  const navigation = useNavigation();
   const { data: dataProduct } = getStoreData(PRODUCT_REDUCER);
-
-  const dataName = dataProduct?.dataProduct[0].name;
+  const dataName = dataProduct?.dataProduct[0]?.name;
   return (
     <View
       style={{
@@ -21,14 +22,16 @@ const Wallet = () => {
 
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>This is SAGA: {dataName} profile</Text>
+
+
         <Button
           title="Go to Details... again"
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate(ROUTES.HOME_TAB as never)}
         />
 
         <Button
           title="Go to Login Screen"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
         />
 
         <Button title="Go back" onPress={() => navigation.goBack()} />

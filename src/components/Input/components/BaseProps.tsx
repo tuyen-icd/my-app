@@ -6,7 +6,7 @@ export interface BaseProps {
     placeholder?: string;
     value?;
     disable?: boolean;
-    leftComponent?: (valueIsNotEmpty, iconStyles, disable) => any;
+    leftComponent?: (valueIsNotEmpty, iconStyles) => any;
     rightComponent?: (iconStyles) => any;
     onRightComponentPress?: () => void;
 }
