@@ -61,7 +61,7 @@ const ContainerTextInput: FC<ContainerTextInputProps> = ({
         )}
       </View>
       <View style={{ minHeight: heightPixel(20) }}>
-        {Boolean(error) && !_.isEmpty(error) && <Text>{error?.message}</Text>}
+        {Boolean(error) && !_.isEmpty(error) && <Text style={{color: COLORS.danger, paddingVertical: 5, paddingHorizontal: 10}}>{error?.message}</Text>}
       </View>
     </>
   );

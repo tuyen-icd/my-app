@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {} from "react-native-gesture-handler";
 import { COLORS, ROUTES } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
@@ -15,13 +15,60 @@ import { LogoICD } from "../../assets/icons";
 import InputPassword from "../../components/Input/InputPassword";
 import InputEmail from "../../components/Input/InputEmail";
 import Button from "../../components/Button/Button";
+import {
+  checkValidateEmail,
+  checkValidatePassword,
+} from "../../utils/checkValidateInput";
+import Loader from "../../components/Loader";
+import BottomFlatPicker from "../../components/BottomFlatPicker";
 
-const Login = () => {
+const Login = ({ route }) => {
   const navigation = useNavigation();
+  const [languagevisible, setLanguageVisible] = useState(false);
   const [loginFormState, setLoginFormState] = useState({
     userName: { value: "", error: null },
     password: { value: "", error: null },
   });
+
+  useEffect(() => {
+    if (route?.params?.register === "registerScreen") {
+      setLoginFormState({
+        ...loginFormState,
+        userName: {
+          value: route.params.userName,
+          error: null,
+        },
+        password: {
+          value: "",
+          error: null,
+        },
+      });
+    }
+  }, [route?.params]);
+
+  console.log("route", route);
+
+  const checkValidateFormLogin = () => {
+    const errorEmail = checkValidateEmail(loginFormState.userName.value);
+    const errorPassword = checkValidatePassword(loginFormState.password.value);
+
+    if (errorEmail !== null || errorPassword !== null) {
+      setLoginFormState({
+        ...loginFormState,
+        userName: {
+          value: loginFormState.userName.value,
+          error: errorEmail,
+        },
+        password: {
+          value: loginFormState.password.value,
+          error: errorPassword,
+        },
+      });
+    } else {
+      Keyboard.dismiss();
+      navigation.navigate(ROUTES.HOME as never);
+    }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -65,7 +112,8 @@ const Login = () => {
             <Button
               text="Log In"
               buttonSize="Medium"
-              onPress={() => navigation.navigate(ROUTES.HOME as never)}
+              // onPress={() => navigation.navigate(ROUTES.HOME as never)}
+              onPress={() => checkValidateFormLogin()}
             />
             {/***************** FORGOT PASSWORD BUTTON *****************/}
             <TouchableOpacity
@@ -93,6 +141,7 @@ const Login = () => {
           </View>
         </View>
       </SafeAreaView>
+ 
     </TouchableWithoutFeedback>
   );
 };

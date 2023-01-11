@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
-import { COLORS } from "../../constants";
+import { COLORS, ROUTES } from "../../constants";
 import {
   IcPersonActiveNew,
   IcPersonNew,
@@ -23,8 +23,19 @@ import Checkbox from "expo-checkbox";
 import { heightPixel, widthPixel } from "../../utils/scanling";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Button from "../../components/Button/Button";
+import {
+  checkValidateEmail,
+  checkValidatePassword,
+  checkValidatePhone,
+  checkValidateRetypePassword,
+  checkValidateStringField,
+} from "../../utils/checkValidateInput";
+import { useNavigation } from "@react-navigation/core";
+import { ShowError } from "../../utils/Alert";
 
 const Register = () => {
+
+  const navigation = useNavigation();
   const [registerState, setRegisterState] = useState({
     fullName: { value: "", error: null },
     phoneNumber: { value: "", error: null },
@@ -33,9 +44,70 @@ const Register = () => {
     retypePassword: { value: "", error: null },
     isChecked: false,
   });
+
+  const checkValidateFormSigup = () => {
+    const errorFullName = checkValidateStringField(
+      registerState.fullName.value
+    );
+    const errorPhoneNumber = checkValidatePhone(
+      registerState.phoneNumber.value
+    );
+    const errorUserName = checkValidateEmail(registerState.userName.value);
+    const errorPassword = checkValidatePassword(registerState.password.value);
+    const errorRetypePassword = checkValidateRetypePassword(
+      registerState.password.value,
+      registerState.retypePassword.value
+    );
+    const checkBoxError = !registerState.isChecked;
+    console.log('checkBoxError :>> ', checkBoxError);
+
+    setRegisterState({
+      ...registerState,
+      fullName: {
+        value: registerState.fullName.value,
+        error: errorFullName,
+      },
+      phoneNumber: {
+        value: registerState.phoneNumber.value,
+        error: errorPhoneNumber,
+      },
+      userName: {
+        value: registerState.userName.value,
+        error: errorUserName,
+      },
+      password: {
+        value: registerState.password.value,
+        error: errorPassword,
+      },
+      retypePassword: {
+        value: registerState.retypePassword.value,
+        error: errorRetypePassword,
+      },
+      isChecked: registerState.isChecked,
+    });
+
+    if (
+      errorFullName ||
+      errorPhoneNumber ||
+      errorUserName ||
+      errorPassword ||
+      errorRetypePassword
+    ) {
+      return false;
+    } else {
+      if (checkBoxError) {
+        ShowError("You need to agree to the privacy policy");
+        return false;
+      }
+    }
+    navigation.navigate(ROUTES.LOGIN as never, {register: 'registerScreen', userName: registerState.userName.value } as never);
+    return true;
+  
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView styles={styles.main}>
+      <SafeAreaView style={styles.main}>
         <View style={styles.container}>
           <View style={styles.row}>
             <LogoICD width={250} height={150} />
@@ -66,8 +138,8 @@ const Register = () => {
 
             <TxtInput
               placeholder="Phone Number"
-              error={registerState.fullName.error}
-              value={registerState.fullName.value}
+              error={registerState.phoneNumber.error}
+              value={registerState.phoneNumber.value}
               leftComponent={(valueIsNotEmpty, styles) =>
                 valueIsNotEmpty ? (
                   <IcPhoneActiveNew {...styles} />
@@ -79,7 +151,7 @@ const Register = () => {
               onChangeText={(text) => {
                 setRegisterState({
                   ...registerState,
-                  fullName: {
+                  phoneNumber: {
                     value: text,
                     error: null,
                   },
@@ -154,9 +226,8 @@ const Register = () => {
             <Button
               text="Sign Up"
               buttonSize="Medium"
-              onPress={() => console.log("test test")}
+              onPress={() => checkValidateFormSigup()}
               buttonStyles={{
-                ...styles.buttonStyle,
                 borderBottomLeftRadius: 15,
                 borderBottomRightRadius: 15,
               }}
@@ -209,5 +280,12 @@ const styles = StyleSheet.create({
     width: widthPixel(18),
     height: heightPixel(18),
     borderColor: COLORS.gradientForm,
+  },
+  paragraph: {
+    color: COLORS.black,
+    fontSize: 14,
+  },
+  buttonTextStyle: {
+    color: COLORS.white,
   },
 });

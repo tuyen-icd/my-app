@@ -1,16 +1,19 @@
 import {
+  Button,
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { FC } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, ROUTES } from "../../constants";
 
-const Settings: FC = () => {
+const Settings = () => {
   const navigation = useNavigation();
+
   return (
     <SafeAreaView
       style={{

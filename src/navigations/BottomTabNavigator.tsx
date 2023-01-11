@@ -1,11 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { COLORS, ROUTES } from "../constants";
-import {
-  Home,
-  Notifications,
-  Wallet,
-} from "../screens/index";
+import { Home, Notifications, Wallet } from "../screens/index";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SettingNavigator from "./SettingNavigator";
 import { Platform, StyleSheet, TouchableOpacity } from "react-native";
@@ -13,11 +9,13 @@ import CustomTabBarButton from "../components/CustomNavigation/CustomTabBarButto
 import CustomTabBar from "../components/CustomNavigation/CustomTabBar";
 import { useNavigation } from "@react-navigation/native";
 
+interface Props {
+  openDrawer: any;
+}
 const Tab = createBottomTabNavigator();
 
 function ButtonTabNavigator() {
-
-  const navigation = useNavigation();
+  const navigation : Props = useNavigation();
 
   return (
     <Tab.Navigator
@@ -78,8 +76,8 @@ function ButtonTabNavigator() {
         name={ROUTES.SETTINGS_NAVIGATOR}
         component={SettingNavigator}
         options={{
-          tabBarLabel: 'Settings',
-          title: 'Settings',
+          tabBarLabel: "Settings",
+          title: "Settings",
           headerShown: true,
           tabBarButton: (props) => (
             <CustomTabBarButton route="settings" {...props} />
@@ -88,10 +86,10 @@ function ButtonTabNavigator() {
             return (
               <TouchableOpacity onPress={() => navigation.openDrawer()}>
                 <Ionicons
-                  name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu'}
+                  name={Platform.OS === "ios" ? "ios-menu" : "md-menu"}
                   size={30}
                   color={COLORS.dark}
-                  style={{marginRight: 10}}
+                  style={{ marginRight: 10 }}
                 />
               </TouchableOpacity>
             );
@@ -107,7 +105,7 @@ export default ButtonTabNavigator;
 const styles = StyleSheet.create({
   tabBarStyle: {
     position: "absolute",
-    backgroundColor: COLORS.transparent,
+    backgroundColor: 'transparent',
     borderTopWidth: 0,
     bottom: 15,
     right: 10,

@@ -7,43 +7,42 @@ import ContainerTextInput from "../ContainerTextInput";
 
 export interface TxtInputProps extends BaseProps {
   secureTextEntry?;
-    value?;
-    onFocusTxtInput?: () => void;
-    onChangeText?: (text) => void;
-    keyboardType?;
-    onSubmitEditing?: (event: any) => void;
-    returnKeyType?;
-    onBlur?: () => void;
-    maxLength?: number;
-    iconEmail?: boolean;
+  value?;
+  onFocusTxtInput?: () => void;
+  onChangeText?: (text) => void;
+  keyboardType?;
+  onSubmitEditing?: (event: any) => void;
+  returnKeyType?;
+  onBlur?: () => void;
+  maxLength?: number;
+  iconEmail?: boolean;
 }
 
 const TxtInput: FC<TxtInputProps> = ({
   error,
-    placeholder,
-    secureTextEntry,
-    containerStyle,
-    leftComponent,
-    rightComponent,
-    onRightComponentPress,
-    onChangeText,
-    onSubmitEditing,
-    onBlur,
-    value,
-    disable,
-    keyboardType,
-    returnKeyType,
-    onFocusTxtInput,
-    maxLength,
+  placeholder,
+  secureTextEntry,
+  containerStyle,
+  leftComponent,
+  rightComponent,
+  onRightComponentPress,
+  onChangeText,
+  onSubmitEditing,
+  onBlur,
+  value,
+  disable,
+  keyboardType,
+  returnKeyType,
+  onFocusTxtInput,
+  maxLength,
 }) => {
   const [valueIsNotEmpty, setValueIsNotEmpty] = useState(Boolean(value));
   const [isFocusedState, setIsFocusedState] = useState(false);
   const [errorState, setErrorState] = useState(null);
 
-
   useEffect(() => {
     setErrorState(error);
-}, [error]);
+  }, [error]);
 
   return (
     <ContainerTextInput
@@ -67,7 +66,7 @@ const TxtInput: FC<TxtInputProps> = ({
         value={value}
         onBlur={() => {
           setIsFocusedState(false);
-          if(onBlur) onBlur();
+          if (onBlur) onBlur();
         }}
         onFocus={() => {
           setIsFocusedState(true);
@@ -76,9 +75,9 @@ const TxtInput: FC<TxtInputProps> = ({
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         onChangeText={(text) => {
-          setErrorState(null)
-          setValueIsNotEmpty(text !== '');
-          if(onChangeText) {
+          setErrorState(null);
+          setValueIsNotEmpty(text !== "");
+          if (onChangeText) {
             onChangeText(text);
           }
         }}

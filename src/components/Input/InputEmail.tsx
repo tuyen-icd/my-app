@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
 import TxtInput, { TxtInputProps } from "./components/TxtInput";
 import { IcEmailActiveNew, IcEmailNew } from "../../assets/icons";
@@ -29,5 +28,3 @@ const InputEmail: FC<TxtInputProps> = ({
 };
 
 export default InputEmail;
-
-const styles = StyleSheet.create({});

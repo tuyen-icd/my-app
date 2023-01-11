@@ -16,6 +16,8 @@ const IcPersonNew = require('./ic_person_new.svg').default;
 const IcPhoneNew = require('./ic_phone_new.svg').default;
 const IcPhoneActiveNew = require('./ic_phone_active_new.svg').default;
 
+const WhiteCamera = require('./CameraWhite.svg').default;
+
 export {
     Logo,
     LogoICD,
@@ -29,5 +31,5 @@ export {
     IcPersonNew,
     IcPhoneNew,
     IcPhoneActiveNew,
-
+    WhiteCamera,
 }

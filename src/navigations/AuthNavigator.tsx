@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../screens/auth/Login";
 import ForgotPassword from "../screens/auth/ForgotPassword";
 import Register from "../screens/auth/Register";
 import { ROUTES, COLORS } from "../constants";
-import ButtonTabNavigator from "./BottomTabNavigator";
-import DrawerNavigator from './DrawerNavigator';
+import DrawerNavigator from "./DrawerNavigator";
 
+// interface RouteType {
+//   route: any;
+// }
 
 const Stack = createStackNavigator();
 
@@ -25,7 +27,7 @@ function AuthNavigator() {
       <Stack.Screen
         name={ROUTES.FORGOT_PASSWORD}
         component={ForgotPassword}
-        options={({ route }) => ({
+        options={({ route } : any) => ({
           headerTintColor: COLORS.white,
           // headerBackTitle: 'Back',
           headerBackTitleVisible: false,
@@ -35,15 +37,20 @@ function AuthNavigator() {
           title: route.params.userId,
         })}
       />
-      <Stack.Screen name={ROUTES.LOGIN} component={Login} options={{
-        headerShown: false,
-      }}/>
+      <Stack.Screen
+        name={ROUTES.LOGIN}
+        component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name={ROUTES.REGISTER} component={Register} />
+
       <Stack.Screen
         name={ROUTES.HOME}
         component={DrawerNavigator}
         options={{
-          headerShown: false // Tắt header của Stack Screen cho TabScreen.
+          headerShown: false, // Tắt header của Stack Screen cho TabScreen.
         }}
       />
     </Stack.Navigator>
