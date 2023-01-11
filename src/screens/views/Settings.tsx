@@ -1,18 +1,36 @@
 import {
   Button,
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, ROUTES } from "../../constants";
+import BottomCamera from "../../components/BottomCamera";
+import pickImage from "../../services.tsx/ImagePickerService";
 
 const Settings = () => {
   const navigation = useNavigation();
+
+  const [imageState, setImageState] = useState([]);
+  const [isShowModal, setIsShowModal] = useState(false);
+
+  const selectImageOptionHandler = async (confirmData: number) => {
+    let imageTemp = null;
+      try {
+        const data = await pickImage(confirmData);
+ 
+        console.log('data :>> ', data);
+
+      } catch (error) {
+        console.log("error", error);
+      }
+
+      setIsShowModal(false);
+  };
 
   return (
     <SafeAreaView
@@ -34,12 +52,31 @@ const Settings = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
+        onPress={() => {
+          setIsShowModal(true);
+        }}
+        style={styles.button}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.buttonText}>Change Take Camera</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
         onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
         style={styles.button}
         activeOpacity={0.8}
       >
         <Text style={styles.buttonText}>Log out</Text>
       </TouchableOpacity>
+
+      <BottomCamera
+        title="Selected Option"
+        isShowModal={isShowModal}
+        onCancel={() => setIsShowModal(false)}
+        onConfirm={(confirmData) => {
+          selectImageOptionHandler(confirmData);
+        }}
+      />
     </SafeAreaView>
   );
 };

@@ -23,8 +23,6 @@ const CustomDrawer = (props) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [imageState, setImageState] = useState(null);
 
-  console.log("imageState", imageState);
-
   const selectImageOptionHandler = async (confirmData) => {
     let image = null;
     if (confirmData === 2) {
