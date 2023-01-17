@@ -1,5 +1,10 @@
 import * as ImagePicker from "expo-image-picker";
+import { useState } from "react";
 import { ShowError } from "./Alert";
+
+const arrayTest = [];
+
+console.log("arrayTest :>> ", arrayTest);
 
 export const pickImageLibrary = async () => {
   try {
@@ -10,8 +15,11 @@ export const pickImageLibrary = async () => {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(image);
-    if (image) return image;
+
+    if (image) {
+      arrayTest.push(image.assets[0]);
+      return arrayTest;
+    }
     return null;
   } catch (error) {
     ShowError("Please allow camera roll/camera roll access to add images");

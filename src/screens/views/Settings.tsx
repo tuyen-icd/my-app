@@ -12,6 +12,18 @@ import { COLORS, ROUTES } from "../../constants";
 import BottomCamera from "../../components/BottomCamera";
 import pickImage from "../../services.tsx/ImagePickerService";
 
+interface dataObject {
+  assets?: dataAssets;
+  canceled: boolean;
+}
+
+interface dataAssets {
+  assetId: string;
+  fileName: string;
+  type: string;
+  uri: string;
+}
+
 const Settings = () => {
   const navigation = useNavigation();
 
@@ -20,16 +32,17 @@ const Settings = () => {
 
   const selectImageOptionHandler = async (confirmData: number) => {
     let imageTemp = null;
-      try {
-        const data = await pickImage(confirmData);
- 
-        console.log('data :>> ', data);
+    try {
+      const data = await pickImage(confirmData);
 
-      } catch (error) {
-        console.log("error", error);
-      }
+      const test = data?.assets[0];
 
-      setIsShowModal(false);
+      console.log("data :>> ", data);
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    setIsShowModal(false);
   };
 
   return (

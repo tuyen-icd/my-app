@@ -20,6 +20,8 @@ import BottomCamera from "../BottomCamera";
 const { width } = Dimensions.get("screen");
 
 const CustomDrawer = (props) => {
+
+  console.log('props', props)
   const [isShowModal, setIsShowModal] = useState(false);
   const [imageState, setImageState] = useState(null);
 

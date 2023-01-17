@@ -1,12 +1,13 @@
 import * as ImagePicker from "expo-image-picker";
+import { FC } from "react";
 
-const pickImage = (type) => {
+const pickImage: any = (type) => {
   if (type == 1) {
     return new Promise((resolve, reject) => {
       const pickFromCamera = async () => {
         const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
-        console.log('status :>> ', status);
+        console.log("status :>> ", status);
 
         if (status !== "granted") {
           reject({ type: "permissionCamera" });
@@ -22,8 +23,7 @@ const pickImage = (type) => {
             quality: 1,
             aspect: [4, 3],
           });
-          console.log('camera: ', image)
-
+          console.log("camera: ", image);
 
           if (image && !image.canceled) {
             return resolve(image);
@@ -43,7 +43,7 @@ const pickImage = (type) => {
       const pickFromGallery = async () => {
         const { status } =
           await ImagePicker.requestMediaLibraryPermissionsAsync();
-          console.log('status', status);
+        console.log("status", status);
         if (status !== "granted") {
           reject({ type: "permissionCameraRoll" });
         } else {
@@ -52,8 +52,7 @@ const pickImage = (type) => {
       };
 
       const handlePicking = async (picker) => {
-
-        console.log('picker :>> ', picker);
+        console.log("picker :>> ", picker);
         try {
           const image = await picker({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -61,8 +60,6 @@ const pickImage = (type) => {
             aspect: [4, 3],
             quality: 1,
           });
-
-          console.log('image: ', image)
 
           if (image && !image.canceled) {
             return resolve(image);
