@@ -1,4 +1,3 @@
-import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { GET_PRODUCTS, SUCCESS } from "../actions/ActionTypes";
 import { getProductFailure, getProductSuccess } from "../actions/ProductAction";

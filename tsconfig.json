@@ -2,5 +2,6 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "noUnusedLocals": false
 }

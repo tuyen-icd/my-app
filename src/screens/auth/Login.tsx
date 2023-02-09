@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {} from "react-native-gesture-handler";
@@ -19,16 +20,19 @@ import {
   checkValidateEmail,
   checkValidatePassword,
 } from "../../utils/checkValidateInput";
-import Loader from "../../components/Loader";
-import BottomFlatPicker from "../../components/BottomFlatPicker";
+import { useDispatch } from "react-redux";
+import { doLoginAction } from "../../redux/actions/AuthAction";
 
 const Login = ({ route }) => {
   const navigation = useNavigation();
-  const [languagevisible, setLanguageVisible] = useState(false);
+  const dispatch = useDispatch();
   const [loginFormState, setLoginFormState] = useState({
     userName: { value: "", error: null },
     password: { value: "", error: null },
   });
+
+  console.log(loginFormState.userName.value, loginFormState.password.value);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (route?.params?.register === "registerScreen") {
@@ -66,8 +70,33 @@ const Login = ({ route }) => {
       });
     } else {
       Keyboard.dismiss();
-      navigation.navigate(ROUTES.HOME as never);
+      onSignInPress(
+        loginFormState.userName.value,
+        loginFormState.password.value
+      );
+      // navigation.navigate(ROUTES.HOME as never);
     }
+  };
+
+  const onSignInPress = (userName, password) => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      dispatch(
+        doLoginAction(userName, password, (error, data) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("dataLogin ==", data);
+          }
+        })
+      );
+    } catch (error) {
+      Alert.alert("Oops! Email or Password ");
+    }
+    setLoading(false);
   };
 
   return (
@@ -141,7 +170,6 @@ const Login = ({ route }) => {
           </View>
         </View>
       </SafeAreaView>
- 
     </TouchableWithoutFeedback>
   );
 };

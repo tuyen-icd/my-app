@@ -1,4 +1,5 @@
 import {
+  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -65,7 +66,12 @@ const Button: FC<ButtonProps> = ({
             ]}
           >
             {Boolean(leftComponent) ? (
-              <View style={{ marginStart: pixelSizeHorizontal(14), backgroundColor: 'red' }}>
+              <View
+                style={{
+                  marginStart: pixelSizeHorizontal(14),
+                  backgroundColor: "red",
+                }}
+              >
                 {leftComponent(iconStyles)}
               </View>
             ) : null}
@@ -89,9 +95,9 @@ const styles = StyleSheet.create({
   baseButton: {
     width: "100%",
     borderRadius: 5,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   baseTextButton: {
     fontSize: fontPixel(18),
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
   },
 
   btnWrapper: {
-    width: '100%',
+    width: "100%",
     marginTop: 12,
     shadowColor: "#000",
     shadowOffset: {

@@ -6,10 +6,6 @@ import Register from "../screens/auth/Register";
 import { ROUTES, COLORS } from "../constants";
 import DrawerNavigator from "./DrawerNavigator";
 
-// interface RouteType {
-//   route: any;
-// }
-
 const Stack = createStackNavigator();
 
 function AuthNavigator() {
@@ -27,14 +23,15 @@ function AuthNavigator() {
       <Stack.Screen
         name={ROUTES.FORGOT_PASSWORD}
         component={ForgotPassword}
-        options={({ route } : any) => ({
+        options={({ route }: any) => ({
+          headerShown: false,
           headerTintColor: COLORS.white,
           // headerBackTitle: 'Back',
           headerBackTitleVisible: false,
           headerStyle: {
             backgroundColor: COLORS.primary,
           },
-          title: route.params.userId,
+          // title: route.params.userId,
         })}
       />
       <Stack.Screen

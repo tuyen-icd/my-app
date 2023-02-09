@@ -32,18 +32,21 @@ import {
 } from "../../utils/checkValidateInput";
 import { useNavigation } from "@react-navigation/core";
 import { ShowError } from "../../utils/Alert";
+import { useDispatch } from "react-redux";
+import { doRegisterAction } from "../../redux/actions/AuthAction";
 
 const Register = () => {
-
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [registerState, setRegisterState] = useState({
     fullName: { value: "", error: null },
     phoneNumber: { value: "", error: null },
-    userName: { value: "", error: null },
+    email: { value: "", error: null },
     password: { value: "", error: null },
     retypePassword: { value: "", error: null },
     isChecked: false,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkValidateFormSigup = () => {
     const errorFullName = checkValidateStringField(
@@ -52,14 +55,14 @@ const Register = () => {
     const errorPhoneNumber = checkValidatePhone(
       registerState.phoneNumber.value
     );
-    const errorUserName = checkValidateEmail(registerState.userName.value);
+    const errorEmail = checkValidateEmail(registerState.email.value);
     const errorPassword = checkValidatePassword(registerState.password.value);
     const errorRetypePassword = checkValidateRetypePassword(
       registerState.password.value,
       registerState.retypePassword.value
     );
     const checkBoxError = !registerState.isChecked;
-    console.log('checkBoxError :>> ', checkBoxError);
+    console.log("checkBoxError :>> ", checkBoxError);
 
     setRegisterState({
       ...registerState,
@@ -71,9 +74,9 @@ const Register = () => {
         value: registerState.phoneNumber.value,
         error: errorPhoneNumber,
       },
-      userName: {
-        value: registerState.userName.value,
-        error: errorUserName,
+      email: {
+        value: registerState.email.value,
+        error: errorEmail,
       },
       password: {
         value: registerState.password.value,
@@ -89,7 +92,7 @@ const Register = () => {
     if (
       errorFullName ||
       errorPhoneNumber ||
-      errorUserName ||
+      errorEmail ||
       errorPassword ||
       errorRetypePassword
     ) {
@@ -100,9 +103,41 @@ const Register = () => {
         return false;
       }
     }
-    navigation.navigate(ROUTES.LOGIN as never, {register: 'registerScreen', userName: registerState.userName.value } as never);
+    // navigation.navigate(ROUTES.LOGIN as never, {register: 'registerScreen', userName: registerState.userName.value } as never);
     return true;
-  
+  };
+
+  const onRegisterPressed = () => {
+    if (checkValidateFormSigup()) {
+      registerAction();
+    }
+  };
+
+  const registerAction = () => {
+    if (isLoading) {
+      return;
+    }
+    setIsLoading(false);
+    const userData = {
+      name: registerState.fullName.value,
+      email: registerState.email.value,
+      phone: registerState.phoneNumber.value,
+      password: registerState.password.value,
+      password_confirmation: registerState.retypePassword.value,
+    };
+    dispatch(
+      doRegisterAction(userData, (error, data) => {
+        if (data) {
+          console.log("registerData ==", data);
+          ShowError(data.message);
+        }
+        if (error) {
+          ShowError(error);
+          console.log("Register Error ==", error);
+        }
+      })
+    );
+    setIsLoading(false);
   };
 
   return (
@@ -161,12 +196,12 @@ const Register = () => {
 
             <InputEmail
               placeholder="Email"
-              value={registerState.userName.value}
-              error={registerState.userName.error}
+              value={registerState.email.value}
+              error={registerState.email.error}
               onChangeText={(text) => {
                 setRegisterState({
                   ...registerState,
-                  userName: {
+                  email: {
                     value: text,
                     error: null,
                   },
@@ -226,7 +261,7 @@ const Register = () => {
             <Button
               text="Sign Up"
               buttonSize="Medium"
-              onPress={() => checkValidateFormSigup()}
+              onPress={() => onRegisterPressed()}
               buttonStyles={{
                 borderBottomLeftRadius: 15,
                 borderBottomRightRadius: 15,
