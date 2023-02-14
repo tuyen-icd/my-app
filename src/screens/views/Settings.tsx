@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { COLORS, ROUTES } from "../../constants";
 import BottomCamera from "../../components/BottomCamera";
 import pickImage from "../../services.tsx/ImagePickerService";
+import Credentials from "../../repos/local/Credentials";
 
 interface dataObject {
   assets?: dataAssets;
@@ -44,6 +45,11 @@ const Settings = () => {
 
     setIsShowModal(false);
   };
+  
+  const handleLogout = () => {
+    Credentials.saveToken('');
+    navigation.navigate(ROUTES.LOGIN as never)
+  }
 
   return (
     <SafeAreaView
@@ -75,7 +81,7 @@ const Settings = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate(ROUTES.LOGIN as never)}
+        onPress={() => handleLogout()}
         style={styles.button}
         activeOpacity={0.8}
       >

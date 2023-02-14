@@ -4,7 +4,7 @@ import { ShowError } from "./Alert";
 
 const arrayTest = [];
 
-console.log("arrayTest :>> ", arrayTest);
+// console.log("arrayTest :>> ", arrayTest);
 
 export const pickImageLibrary = async () => {
   try {

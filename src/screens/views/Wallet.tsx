@@ -1,14 +1,23 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useEffect, useLayoutEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
-import getStoreData from "../../redux/Helpers";
 import { PRODUCT_REDUCER } from "../../redux/reducers/ReducerTypes";
 import { useNavigation } from "@react-navigation/native";
+import getStoreData from "../../redux/Helpers";
+import Credentials from "../../repos/local/Credentials";
+import axios from "axios";
 
 const Wallet: FC = () => {
   const navigation = useNavigation();
   const { data: dataProduct } = getStoreData(PRODUCT_REDUCER);
   const dataName = dataProduct?.dataProduct[0]?.name;
+
+  useLayoutEffect(()=> {
+    Credentials.loadToken().then(token => {
+      console.log("TOKEN === HOME", token)
+    })
+  }, []);
+
   return (
     <View
       style={{

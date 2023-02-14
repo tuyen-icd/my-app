@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Keyboard,
   SafeAreaView,
   StyleSheet,
@@ -34,6 +35,7 @@ import { useNavigation } from "@react-navigation/core";
 import { ShowError } from "../../utils/Alert";
 import { useDispatch } from "react-redux";
 import { doRegisterAction } from "../../redux/actions/AuthAction";
+import Loader from "../../components/Loader";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -114,10 +116,8 @@ const Register = () => {
   };
 
   const registerAction = () => {
-    if (isLoading) {
-      return;
-    }
-    setIsLoading(false);
+    setIsLoading(true)
+
     const userData = {
       name: registerState.fullName.value,
       email: registerState.email.value,
@@ -128,16 +128,26 @@ const Register = () => {
     dispatch(
       doRegisterAction(userData, (error, data) => {
         if (data) {
-          console.log("registerData ==", data);
-          ShowError(data.message);
+          if (!Array.isArray(data.errors) || !data.errors.length) {
+            console.log("registerData ==", data);
+            ShowError(data.message, () => {
+              backToLogin();
+            });
+            return;
+          }
+          ShowError(data.errors[0]);
         }
         if (error) {
           ShowError(error);
           console.log("Register Error ==", error);
         }
+      setIsLoading(false);
       })
     );
-    setIsLoading(false);
+  };
+
+  const backToLogin = () => {
+    navigation.navigate(ROUTES.LOGIN as never);
   };
 
   return (
@@ -270,6 +280,8 @@ const Register = () => {
             />
           </KeyboardAwareScrollView>
         </View>
+        {/* <ActivityIndicator size="large"/> */}
+        <Loader isVisible={isLoading} />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

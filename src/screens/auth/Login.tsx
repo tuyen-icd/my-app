@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {} from "react-native-gesture-handler";
@@ -22,6 +23,8 @@ import {
 } from "../../utils/checkValidateInput";
 import { useDispatch } from "react-redux";
 import { doLoginAction } from "../../redux/actions/AuthAction";
+import Loader from "../../components/Loader";
+import { ShowError } from "../../utils/Alert";
 
 const Login = ({ route }) => {
   const navigation = useNavigation();
@@ -31,8 +34,8 @@ const Login = ({ route }) => {
     password: { value: "", error: null },
   });
 
-  console.log(loginFormState.userName.value, loginFormState.password.value);
-  const [loading, setLoading] = useState(false);
+  // console.log(loginFormState.userName.value, loginFormState.password.value);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (route?.params?.register === "registerScreen") {
@@ -50,7 +53,7 @@ const Login = ({ route }) => {
     }
   }, [route?.params]);
 
-  console.log("route", route);
+  // console.log("route", route);
 
   const checkValidateFormLogin = () => {
     const errorEmail = checkValidateEmail(loginFormState.userName.value);
@@ -78,25 +81,30 @@ const Login = ({ route }) => {
     }
   };
 
-  const onSignInPress = (userName, password) => {
-    if (loading) {
+  const onSignInPress = (userName: string, password: string) => {
+    if (isLoading) {
       return;
     }
-    setLoading(true);
+
+    setIsLoading(true);
     try {
       dispatch(
         doLoginAction(userName, password, (error, data) => {
-          if (error) {
-            console.log(error);
+          if (data && data.success && data.status == 200) {
+            navigation.navigate(ROUTES.HOME as never);
           } else {
-            console.log("dataLogin ==", data);
+            ShowError(data.message);
           }
+
+          if (error) {
+            ShowError(error);
+          }
+          setIsLoading(false);
         })
       );
     } catch (error) {
       Alert.alert("Oops! Email or Password ");
     }
-    setLoading(false);
   };
 
   return (
@@ -169,6 +177,7 @@ const Login = ({ route }) => {
             </TouchableOpacity>
           </View>
         </View>
+        <Loader isVisible={isLoading} />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
+import Credentials from "../../repos/local/Credentials";
 import { DO_LOGIN, DO_REGISTER, FAILURE } from "../actions/ActionTypes";
 
 function* doLoginSaga(action) {
@@ -7,19 +8,29 @@ function* doLoginSaga(action) {
   try {
     const url = "https://apingweb.com/api/login";
     const requestData = {
-      userName: action.userName,
+      email: action.userName,
       password: action.password,
     };
 
-    const response = yield call(() =>
-      axios.post(url, JSON.stringify(requestData), {
-        headers: new Headers({
-          //  'Authorization': 'Basic ' + base64.encode("admin : 12345");   <-----  for Basic Auth (install base64)
-          "Content-Type": "application/json",
-        }),
+    fetch(url, {
+      method: "POST",
+      headers: new Headers({
+        //  'Authorization': 'Basic ' + base64.encode("admin : 12345");   <-----  for Basic Auth (install base64)
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify(requestData),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result) {
+          action.callback && action.callback(null, result);
+          if(result && result.success == true && result.status === 200){
+            console.log('PINGGO')   }
+            Credentials.saveToken(result.token)
+        }
+        console.log(result);
       })
-    );
-    console.log("response", response);
+      .catch((error) => console.error(error));
   } catch (error) {
     console.log("doLogin Error ===", error);
   }

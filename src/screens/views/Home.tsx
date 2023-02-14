@@ -1,9 +1,10 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { COLORS } from "../../constants";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getProduct } from "../../redux/actions/ProductAction";
+import Credentials from "../../repos/local/Credentials";
 
 const Home = () => {
   const [APIData, setAPIData] = useState([]);
@@ -53,7 +54,12 @@ const Home = () => {
       <View>
         <TextInput
           placeholder="SEARCH......"
-          style={{borderColor: COLORS.green, borderWidth: 1, padding: 16, borderRadius: 14}}
+          style={{
+            borderColor: COLORS.green,
+            borderWidth: 1,
+            padding: 16,
+            borderRadius: 14,
+          }}
           onChangeText={(e) => searchItems(e)}
         />
 

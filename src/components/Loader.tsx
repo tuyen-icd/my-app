@@ -1,22 +1,27 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { COLORS } from "../constants";
 
-const Loader = (isVisible: any, showLoadingView = false) => {
+interface LoaderProps {
+  isVisible: any;
+}
+
+const Loader = (props: LoaderProps) => {
   return (
     <View
       style={[
         styles.container,
-        { width: isVisible ? "100%" : "0%", height: isVisible ? "100%" : "0%" },
+        {
+          width: props.isVisible ? "100%" : "0%",
+          height: props.isVisible ? "100%" : "0%",
+        },
       ]}
     >
-      {!showLoadingView && (
-        <ActivityIndicator
-          size="large"
-          color={COLORS.primary}
-          animating={isVisible}
-        />
-      )}
+      <ActivityIndicator
+        size="large"
+        color={COLORS.primary}
+        animating={props.isVisible}
+      />
     </View>
   );
 };
