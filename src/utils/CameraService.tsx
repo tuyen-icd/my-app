@@ -16,6 +16,8 @@ export const pickImageLibrary = async () => {
       quality: 1,
     });
 
+    console.log("image__image:", image)
+
     if (image) {
       arrayTest.push(image.assets[0]);
       return arrayTest;

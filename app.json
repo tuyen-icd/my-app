@@ -14,15 +14,27 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos."
+      },
+      "bundleIdentifier": "com.masaruhcm.myapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,7 +45,6 @@
         {
           "photosPermission": "custom photos permission",
           "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
-
           "//": "Disables the microphone permission",
           "microphonePermission": false
         }
@@ -46,6 +57,11 @@
           "isAccessMediaLocationEnabled": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b06edd8d-50c5-4d5f-8f4c-c8f2c42f3b5e"
+      }
+    }
   }
 }

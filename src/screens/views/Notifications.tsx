@@ -17,6 +17,7 @@ const Notifications = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [imageState, setImageState] = useState([]);
 
+
   console.log("imageState", imageState);
 
   const selectImageOptionHandler = async (confirmData: number) => {
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   },
   trashButton: {
     position: "absolute",
-    top: 75,
+    top: 0,
     left: 75,
     width: 40,
     height: 40,

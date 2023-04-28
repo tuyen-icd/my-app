@@ -12,12 +12,6 @@ const Wallet: FC = () => {
   const { data: dataProduct } = getStoreData(PRODUCT_REDUCER);
   const dataName = dataProduct?.dataProduct[0]?.name;
 
-  useLayoutEffect(()=> {
-    Credentials.loadToken().then(token => {
-      console.log("TOKEN === HOME", token)
-    })
-  }, []);
-
   return (
     <View
       style={{

@@ -13,6 +13,7 @@ async function saveToken(token: string) {
 async function loadToken() {
     try {
         const token = await AsyncStorage.getItem(SESSION_TOKEN);
+        console.log("token", token);
         return token;
     } catch (e) {
         return '';
