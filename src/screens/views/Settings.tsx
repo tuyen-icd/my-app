@@ -45,11 +45,11 @@ const Settings = () => {
 
     setIsShowModal(false);
   };
-  
+
   const handleLogout = () => {
-    Credentials.saveToken('');
-    navigation.navigate(ROUTES.LOGIN as never)
-  }
+    Credentials.saveToken("");
+    navigation.navigate(ROUTES.LOGIN as never);
+  };
 
   return (
     <SafeAreaView

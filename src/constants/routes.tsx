@@ -11,6 +11,10 @@ export default {
   WALLET: "Wallet",
   WALLET_DRAWER: "Wallet Drawer",
 
+  PRODUCTS: "Products",
+  PRODUCT_DETAIL: "Product Detail",
+  PRODUCT_NAVIGATOR: "Products",
+
   NOTIFICATIONS: "Notifications",
   NOTIFICATIONS_DRAWER: "Notifications Drawer",
 

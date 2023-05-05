@@ -8,6 +8,8 @@ import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import CustomTabBarButton from "../components/CustomNavigation/CustomTabBarButton";
 import CustomTabBar from "../components/CustomNavigation/CustomTabBar";
 import { useNavigation } from "@react-navigation/native";
+import Products from "../screens/views/Products/Products";
+import ProductNavigator from "./ProductNavigator";
 
 interface Props {
   openDrawer: any;
@@ -15,13 +17,13 @@ interface Props {
 const Tab = createBottomTabNavigator();
 
 function ButtonTabNavigator() {
-  const navigation : Props = useNavigation();
+  const navigation: Props = useNavigation();
 
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={({ route }) => ({
-        headerShown: false, // Tắt header của Tab Screen
+        headerShown: true, // Tắt header của Tab Screen
         tabBarShowLabel: false, //Tắt tên ở tab TabButtom
         tabBarStyle: styles.tabBarStyle,
         tabBarInactiveTintColor: COLORS.dark,
@@ -39,6 +41,8 @@ function ButtonTabNavigator() {
             iconName = focused
               ? "md-notifications-sharp"
               : "md-notifications-outline";
+          } else if (route.name === ROUTES.PRODUCTS) {
+            iconName = focused ? "gift" : "gift-outline";
           }
 
           return <Ionicons name={iconName} size={22} color={color} />;
@@ -63,6 +67,32 @@ function ButtonTabNavigator() {
           ),
         }}
       />
+
+      <Tab.Screen
+        name={ROUTES.PRODUCT_NAVIGATOR}
+        component={ProductNavigator}
+        options={{
+          tabBarLabel: "Products",
+          title: "Products",
+          headerShown: true,
+          tabBarButton: (props) => (
+            <CustomTabBarButton route="products" {...props} />
+          ),
+          headerRight: () => {
+            return (
+              <TouchableOpacity onPress={() => navigation.openDrawer()}>
+                <Ionicons
+                  name={Platform.OS === "ios" ? "ios-menu" : "md-menu"}
+                  size={30}
+                  color={COLORS.dark}
+                  style={{ marginRight: 10 }}
+                />
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
+
       <Tab.Screen
         name={ROUTES.NOTIFICATIONS}
         component={Notifications}
@@ -105,7 +135,7 @@ export default ButtonTabNavigator;
 const styles = StyleSheet.create({
   tabBarStyle: {
     position: "absolute",
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderTopWidth: 0,
     bottom: 15,
     right: 10,

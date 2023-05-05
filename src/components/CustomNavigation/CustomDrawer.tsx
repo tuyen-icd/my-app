@@ -20,8 +20,6 @@ import BottomCamera from "../BottomCamera";
 const { width } = Dimensions.get("screen");
 
 const CustomDrawer = (props) => {
-
-  console.log('props', props)
   const [isShowModal, setIsShowModal] = useState(false);
   const [imageState, setImageState] = useState(null);
 
@@ -47,10 +45,7 @@ const CustomDrawer = (props) => {
         <View style={{ height: 140, width: 140 }}>
           {/* <Image source={IMGS.user} style={styles.userImg} /> */}
           {imageState ? (
-            <Image
-              source={{ uri: imageState }}
-              style={styles.userImg}
-            />
+            <Image source={{ uri: imageState }} style={styles.userImg} />
           ) : (
             <Image source={IMGS.user} style={styles.userImg} />
           )}

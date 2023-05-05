@@ -17,9 +17,6 @@ const Notifications = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [imageState, setImageState] = useState([]);
 
-
-  console.log("imageState", imageState);
-
   const selectImageOptionHandler = async (confirmData: number) => {
     let image = null;
     if (confirmData === 2) {
