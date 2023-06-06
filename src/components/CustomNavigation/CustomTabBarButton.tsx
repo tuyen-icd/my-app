@@ -14,7 +14,7 @@ const CustomTabBarButton = props => {
             style={[
               styles.svgGapFiller,
               {
-                borderTopLeftRadius: route === 'home' ? 10 : 0,
+                borderTopLeftRadius: route === 'products' ? 10 : 0,
               },
             ]}
           />
@@ -50,7 +50,7 @@ const CustomTabBarButton = props => {
         style={[
           styles.inactiveBtn,
           {
-            borderTopLeftRadius: route === 'home' ? 10 : 0,
+            borderTopLeftRadius: route === 'products' ? 10 : 0,
             borderTopRightRadius: route === 'settings' ? 10 : 0,
           },
         ]}>
@@ -64,8 +64,11 @@ export default CustomTabBarButton;
 
 const styles = StyleSheet.create({
   btnWrapper: {
-    flex: 1,
+    // flex: 1,
+    
     alignItems: 'center',
+    // backgroundColor: 'red',
+
   },
   activeBtn: {
     flex: 1,
@@ -74,7 +77,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 50 / 2,
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
+    backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 5,
@@ -82,11 +86,15 @@ const styles = StyleSheet.create({
   inactiveBtn: {
     flex: 1,
     backgroundColor: COLORS.white,
+    // backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
+    height: 58,
   },
   svgGapFiller: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    // backgroundColor: COLORS.white,
+    backgroundColor: 'pink',
+    height: 50,
   },
 });

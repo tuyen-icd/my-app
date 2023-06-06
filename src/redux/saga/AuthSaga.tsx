@@ -24,9 +24,10 @@ function* doLoginSaga(action) {
       .then((result) => {
         if (result) {
           action.callback && action.callback(null, result);
-          if(result && result.success == true && result.status === 200){
-            console.log('PINGGO')   }
-            Credentials.saveToken(result.token)
+          if (result && result.success == true && result.status === 200) {
+            console.log("PINGGO");
+          }
+          Credentials.saveToken(result.token);
         }
         console.log(result);
       })

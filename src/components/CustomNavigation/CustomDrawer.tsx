@@ -39,7 +39,10 @@ const CustomDrawer = (props) => {
 
   return (
     <DrawerContentScrollView {...props}>
-      <ImageBackground source={IMGS.bgPattern} style={{ height: 140 }}>
+      <ImageBackground
+        source={IMGS.bgPattern}
+        style={{ height: 140, marginBottom: 30 }}
+      >
         {/* <Image source={IMGS.user} style={styles.userImg} /> */}
 
         <View style={{ height: 140, width: 140 }}>

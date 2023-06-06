@@ -62,6 +62,17 @@ function DrawerNavigator() {
           ),
         }}
       />
+
+      <Drawer.Screen
+        name={ROUTES.SETTINGS_NAVIGATOR}
+        component={Notifications}
+        options={{
+          title: "Notifications",
+          drawerIcon: ({ focused, color, size }) => (
+            <Ionicons name="notifications" size={18} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }

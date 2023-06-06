@@ -5,17 +5,39 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { COLORS } from "../../constants";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import BottomCamera from "../../components/BottomCamera";
 import { heightPixel, widthPixel } from "../../utils/scanling";
 import { pickImageLibrary } from "../../utils/CameraService";
 import { Image } from "react-native";
+import SMSVerifyCode from 'react-native-sms-verifycode'
 
 const Notifications = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [imageState, setImageState] = useState([]);
+
+  // const verifyCodeRef = useRef(null);
+
+  // const handleInputCompleted = (code) => {
+  //   // Code input completed
+  //   console.log('Verification code:', code);
+  // };
+
+  // const handleVerifyCode = () => {
+  //   const verificationCode = verifyCodeRef.current.getCode();
+  //   // Verify the entered verification code
+  //   if (verificationCode) {
+  //     // Verification code is available
+  //     console.log('Verifying code:', verificationCode);
+  //     // Perform verification logic here
+  //     // ...
+  //   } else {
+  //     // Verification code is empty
+  //     Alert.alert('Verification Failed', 'Please enter the verification code.');
+  //   }
+  // };
 
   const selectImageOptionHandler = async (confirmData: number) => {
     let image = null;
@@ -45,6 +67,16 @@ const Notifications = () => {
         backgroundColor: COLORS.bgColor,
       }}
     >
+
+      <SMSVerifyCode
+        ref={ref => (this.verifycode = ref)}
+        onInputCompleted={this.onInputCompleted}
+        containerPaddingHorizontal={30}
+      />
+      <Button title="Verify Code" onPress={handleVerifyCode} />
+
+
+
       <Text style={{ textAlign: "center", paddingBottom: heightPixel(50) }}>
         Notifications!
       </Text>
@@ -90,6 +122,8 @@ const Notifications = () => {
           selectImageOptionHandler(confirmData);
         }}
       />
+
+
     </View>
   );
 };

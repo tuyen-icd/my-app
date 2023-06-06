@@ -91,7 +91,7 @@ const Login = ({ route }) => {
       dispatch(
         doLoginAction(userName, password, (error, data) => {
           if (data && data.success && data.status == 200) {
-            navigation.navigate(ROUTES.HOME as never);
+            navigation.navigate(ROUTES.PRODUCTS as never);
           } else {
             ShowError(data.message);
           }

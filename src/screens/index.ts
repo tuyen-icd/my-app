@@ -13,6 +13,8 @@ export { default as ForgotPassword } from "./auth/ForgotPassword";
 export { default as Notifications } from "./views/Notifications";
 export { default as Profile } from "./views/Profile";
 
+export { default as SMSVerifyCode } from "./views/SMSVerifyCode"
+
 // Auth Screens
 export { default as Login } from "./auth/Login";
 export { default as Register } from "./auth/Register";

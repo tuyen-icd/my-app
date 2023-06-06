@@ -26,7 +26,6 @@ const Wallet: FC = () => {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>This is SAGA: {dataName} profile</Text>
 
-
         <Button
           title="Go to Details... again"
           onPress={() => navigation.navigate(ROUTES.HOME_TAB as never)}

@@ -8,7 +8,6 @@ import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import CustomTabBarButton from "../components/CustomNavigation/CustomTabBarButton";
 import CustomTabBar from "../components/CustomNavigation/CustomTabBar";
 import { useNavigation } from "@react-navigation/native";
-import Products from "../screens/views/Products/Products";
 import ProductNavigator from "./ProductNavigator";
 
 interface Props {
@@ -50,25 +49,6 @@ function ButtonTabNavigator() {
       })}
     >
       <Tab.Screen
-        name={ROUTES.HOME_TAB}
-        component={Home}
-        options={{
-          tabBarButton: (props) => (
-            <CustomTabBarButton route="home" {...props} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name={ROUTES.WALLET}
-        component={Wallet}
-        options={{
-          tabBarButton: (props) => (
-            <CustomTabBarButton route="Wallet" {...props} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
         name={ROUTES.PRODUCT_NAVIGATOR}
         component={ProductNavigator}
         options={{
@@ -94,6 +74,26 @@ function ButtonTabNavigator() {
       />
 
       <Tab.Screen
+        name={ROUTES.WALLET}
+        component={Wallet}
+        options={{
+          tabBarButton: (props) => (
+            <CustomTabBarButton route="Wallet" {...props} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name={ROUTES.HOME_TAB}
+        component={Home}
+        options={{
+          tabBarButton: (props) => (
+            <CustomTabBarButton route="home" {...props} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
         name={ROUTES.NOTIFICATIONS}
         component={Notifications}
         options={{
@@ -102,6 +102,7 @@ function ButtonTabNavigator() {
           ),
         }}
       />
+
       <Tab.Screen
         name={ROUTES.SETTINGS_NAVIGATOR}
         component={SettingNavigator}

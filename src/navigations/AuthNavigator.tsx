@@ -50,6 +50,14 @@ function AuthNavigator() {
           headerShown: false, // Tắt header của Stack Screen cho TabScreen.
         }}
       />
+
+      <Stack.Screen
+        name={ROUTES.PRODUCTS}
+        component={DrawerNavigator}
+        options={{
+          headerShown: false, // Tắt header của Stack Screen cho TabScreen.
+        }}
+      />
     </Stack.Navigator>
   );
 }
